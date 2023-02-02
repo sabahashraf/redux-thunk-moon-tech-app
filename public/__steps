@@ -1,0 +1,80 @@
+*
+1.starter pack had layout-->main,dashboard
+2.pages-->main,dashboard
+3.How to add multiple reducers and then thunk
+4.first to handle filter we created filterReducer.js
+5.multiple reducer store er shate coonect korte combine korte hoy..that's why we made rootReducer.js-->import combineReducers from redux-->passed productReducer and filterReducer into combinReducers function and export as rootreducer.
+------working on filterReducer------
+6.in filter reducer.js take state as brand,stock,keyword
+7.write action types toggle-stock,toggle-brand
+8.mkdir filterActions.js.write toggleBrand function.
+9.implemented case TOGGLE_BRAND in filterReducer.js
+10.understood logic
+11.implemented stock logic
+---UI handle for filters.----
+12.home.js e use Selector die state nie ashte hob
+13.then if stock use active class
+14.active class depending on brand name
+----now working on actual filter-----
+15.let content;
+-----adding third party middleware------
+16.middleware holo interceptor..middle e boshe kichu akta korbe..to add middleware import applymiddleware from redux;
+17.applyMiddleware store const e second parameter e boshe..compose with devtool comment kore rakhlam
+18.to check a middle ware we installed npm i redux-logger and import it in store.js
+19.how logger works?if we take a action like add to cart then we can see it in console messages
+20.to use redux devtool wrap applymiddleware with compose with devtool
+
+---adding own custom middleware-----
+21.redux-->middlewares-->cartCounter.js
+22.refractoring cart.js...instead state.cart...state.product.cart
+23.now chachchi cart e position set korte..position means konta age click hoice shetak age rakha..ata cart e dhukanor agei set korte hob..position onujani sort korbo
+24.ajonno middleware lagbe..middleware functionta hobe cury function..cary holo akta technique ja parametergulak vag vag kore nei
+google search currying in javascript---javascript.info
+25.store,next,action(sequence important)
+26.applyMiddleware e cartCounter import korlam
+27.cartCounter theke amra console log kore current state action dekhte pari.return next(action)korle actionta actually dispatch hoye jabe.like action jodi ADD_TO_CART hoy tahole cart e product add hoye jabe..amra chacchhi cart e product add howar age kichu akta(cart position add)korte.
+28.now logic likhte hob.amra only add to cart actionk atkabo ty if statement likhte hob
+29.baki actiongulak return next(action) kore chere dite hob
+30.if statement likhar age store.getState die cart porjonto pouchte hob..tarpor if state e action.payload er shate cartPosition:cart.legth add korte hobe..tarpor retun next e newaction pathate hob
+31.cart.js a cartPosition hishabe sort korte hob
+------now will add thunk middleware---
+32.npm i redux-thunk
+33.to add muliple middleware use ,
+34.akhon productk action kore load korlam
+a) action types e LOAD_PRODUCT
+b)action creator e loadProduct function
+c) productReducer e case LOAD_PRODUCT korlam
+BUT THIS IS NOT THE PROPER WAY TO HANDLE ASYNCRONOUS ACTIVITY
+35.thunk function return kore
+redux-->thunk-->products-->fetchProducts.js
+36.thunk function akta anonymous function return kore,,amra ate dispatch r getState er access pabo
+37.product list component theke data thunk function dispatch kore load korlam
+
+....add product functionality implement...
+38.akhon add product functionalityr jonno age locally product add korbo
+39.case add-product,action type add-product and action creator a addproduct dunction like addProduct component et submit function e dispatch korlam
+40.akhon thunk function er madhdhome dispatch korbo
+41.delete product functionality implement..
+42.module 10 e kichu homework dise.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*
