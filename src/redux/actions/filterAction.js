@@ -1,4 +1,9 @@
-import { TOGGLE_BRAND, TOGGLE_STOCK } from "../actionTypes/actionTypes";
+import {
+  CLEAR_FILTER,
+  SEARCH_INPUT_CHANGE,
+  TOGGLE_BRAND,
+  TOGGLE_STOCK,
+} from "../actionTypes/actionTypes";
 
 export const toggleBrand = (brandName) => {
   return {
@@ -9,5 +14,16 @@ export const toggleBrand = (brandName) => {
 export const toggleStock = () => {
   return {
     type: TOGGLE_STOCK,
+  };
+};
+export const clearFilter = () => {
+  return {
+    type: CLEAR_FILTER,
+  };
+};
+export const searchInputChange = (value) => {
+  return {
+    type: SEARCH_INPUT_CHANGE,
+    payload: value,
   };
 };

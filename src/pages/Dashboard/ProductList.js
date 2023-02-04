@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import deleteProductData from "../../redux/thunk/deleteProduct";
 import loadProductData from "../../redux/thunk/products/fetchProducts";
+import updateProductData from "../../redux/thunk/products/updateProductData";
 
 const ProductList = () => {
   /*  const [products, setProducts] = useState([]);
@@ -42,13 +44,16 @@ const ProductList = () => {
                   <div class="font-semibold text-left">Price</div>
                 </th>
                 <th class="p-2">
+                  <div class="font-semibold text-center">Edit</div>
+                </th>
+                <th class="p-2">
                   <div class="font-semibold text-center">Action</div>
                 </th>
               </tr>
             </thead>
 
             <tbody class="text-sm divide-y divide-gray-100">
-              {products.map(({ model, brand, price, status, _id }) => (
+              {products.map(({ brand, _id, model, status, price }) => (
                 <tr>
                   <td class="p-2">
                     <input type="checkbox" class="w-5 h-5" value="id-1" />
@@ -72,6 +77,11 @@ const ProductList = () => {
                     <div class="text-left font-medium text-indigo-500">
                       {price}
                     </div>
+                  </td>
+                  <td class="p-2">
+                    <Link to={`update-product/${_id}`}>
+                      <div class="flex justify-center">Edit</div>
+                    </Link>
                   </td>
                   <td class="p-2">
                     <div class="flex justify-center">

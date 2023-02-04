@@ -4,6 +4,7 @@ import {
   DELETE_PRODUCT,
   LOAD_PRODUCT,
   REMOVE_FROM_CART,
+  UPDATE_PRODUCT,
 } from "../actionTypes/actionTypes";
 
 const initialState = {
@@ -23,6 +24,11 @@ const productReducer = (state = initialState, action) => {
         products: action.payload,
       };
     case ADD_PRODUCT:
+      return {
+        ...state,
+        products: [...state.products, action.payload],
+      };
+    case UPDATE_PRODUCT:
       return {
         ...state,
         products: [...state.products, action.payload],

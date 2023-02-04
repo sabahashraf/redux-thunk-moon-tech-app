@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ProductCard from "../../components/ProductCard";
-import { toggleBrand, toggleStock } from "../../redux/actions/filterAction";
+import {
+  clearFilter,
+  toggleBrand,
+  toggleStock,
+} from "../../redux/actions/filterAction";
 import { loadProduct } from "../../redux/actions/productAction";
 import loadProductData from "../../redux/thunk/products/fetchProducts";
 
@@ -10,7 +14,7 @@ const Home = () => {
   const dispatch = useDispatch();
   const products = useSelector((state) => state.product.products);
   const filters = useSelector((state) => state.filter.filters);
-  const { brands, stock } = filters;
+  const { brands, stock, keyword } = filters;
 
   useEffect(() => {
     /*    fetch("http://localhost:5000/products")
@@ -27,7 +31,7 @@ const Home = () => {
       <ProductCard key={product.model} product={product} />
     ));
   }
-  if (products.length && (stock || brands.length)) {
+  if (products.length && (stock || brands.length || keyword)) {
     content = products
       .filter((product) => {
         if (stock) {
@@ -42,8 +46,24 @@ const Home = () => {
         }
         return product;
       })
+      .filter((product) => {
+        if (keyword.length) {
+          return keyword.toLowerCase().includes(product.model.toLowerCase());
+        }
+        return product;
+      })
       .map((product) => <ProductCard key={product.model} product={product} />);
   }
+  /* if (products.length && keyword) {
+    content = products
+      .filter((product) => {
+        if (keyword.length) {
+          return product.model.toLowerCase().includes(keyword.toLowerCase());
+        }
+        return product;
+      })
+      .map((product) => <ProductCard key={product.model} product={product} />);
+  } */
 
   return (
     <div className="max-w-7xl gap-14 mx-auto my-10">
@@ -71,6 +91,12 @@ const Home = () => {
           onClick={() => dispatch(toggleBrand("intel"))}
         >
           Intel
+        </button>
+        <button
+          className={`border px-3 py-2 rounded-full font-semibold  }`}
+          onClick={() => dispatch(clearFilter())}
+        >
+          Clear
         </button>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-14">

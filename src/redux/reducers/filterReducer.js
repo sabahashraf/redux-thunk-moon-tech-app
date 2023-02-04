@@ -1,4 +1,9 @@
-import { TOGGLE_BRAND, TOGGLE_STOCK } from "../actionTypes/actionTypes";
+import {
+  CLEAR_FILTER,
+  SEARCH_INPUT_CHANGE,
+  TOGGLE_BRAND,
+  TOGGLE_STOCK,
+} from "../actionTypes/actionTypes";
 
 export const initialState = {
   filters: {
@@ -37,6 +42,19 @@ export const filterReducer = (state = initialState, action) => {
           ...state.filters,
           stock: !state.filters.stock,
         },
+      };
+    case CLEAR_FILTER:
+      return {
+        ...state,
+        filters: {
+          brands: [],
+          stock: false,
+        },
+      };
+    case SEARCH_INPUT_CHANGE:
+      return {
+        ...state,
+        keyword: action.payload,
       };
     default:
       return state;
